@@ -86,15 +86,23 @@ class Car {
   fill(gallons){
     this.tank += gallons;
   }
-  // drive(distance){
-  //   this.tank 
-  //   if(this.tank > 0){
-  //     distance += this.odometer;
-  //   } else {
-  //     return `I ran out of fuel at ${this.odometer} miles!`;
-  //   }
-  // }
+  drive(distance){
+    let totalGal = distance / this.milesPerGallon;
+    this.tank = this.tank - totalGal ;
+    console.log(this.tank)
+    if(this.tank > 0){
+      this.odometer += distance;
+    } else {
+      this.tank = 0;
+      this.odometer += distance;
+      return `I ran out of fuel at ${this.odometer} miles!`;
+    }
+  }
 }
+
+
+
+
 
 /*
   TASK 3
@@ -109,8 +117,24 @@ class Car {
         + {name} and {location} of course come from the instance's own properties.
 */
 class Lambdasian {
-
+  constructor(obj){
+    this.name = obj.name;
+    this.age = obj.age;
+    this.location = obj.location;
+  }
+  speak(){
+    return `Hello my name is ${this.name}, I am from ${this.location}`;
+  }
 }
+ 
+// let person = new Lambdasian({name:'Christina', age: 31, location: 'California'});
+
+// console.log(person.name)
+
+
+
+
+
 
 /*
   TASK 4
@@ -126,9 +150,29 @@ class Lambdasian {
         + `demo` receives a `subject` string as an argument and returns the phrase 'Today we are learning about {subject}' where subject is the param passed in.
         + `grade` receives a `student` object and a `subject` string as arguments and returns '{student.name} receives a perfect score on {subject}'
 */
-class Instructor {
-
+class Instructor extends Lambdasian {
+  constructor(obj){
+    super();
+    this.specialty = obj.specialty;
+    this.favLanguage = obj.favLanguage;
+    this.catchPhrase = obj.catchPhrase;
+  }
+  demo(subject){
+    return `Today we are learning about ${subject}`
+  }
+  grade(student, subject){
+    return `${student.name} receives a perfect score on ${subject}`
+  }
 }
+
+let Dave = new Instructor({name:'Dave', age:'old enough', location:'Lambdaland', specialty:'JS', favLanguage:'JavaScript', catchPhrase:'okay dudes'});
+
+console.log(Dave);
+
+
+
+
+
 
 /*
   TASK 5
